@@ -27,7 +27,7 @@ runs:
 outputs:
   short-sha:
     description: short sha
-    value: ${{ steps.actions.csha.outputs.s }}
+    value: ${{ steps.action.csha.outputs.s }}
   commit-message:
     description: msg
-    value: ${{ steps.actions.msha.outputs.m }}
+    value: ${{ steps.action.msha.outputs.m }}
