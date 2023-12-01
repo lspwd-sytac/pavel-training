@@ -1,0 +1,12 @@
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  pavel-demo:
+    name: Print defaults
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print date
+        run: echo `date`
