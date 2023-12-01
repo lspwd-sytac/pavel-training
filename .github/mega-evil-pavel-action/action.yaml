@@ -11,6 +11,7 @@ runs:
   steps:
     - name: csha
       shell: bash
+      id: csha
       env:
         INP_M_PRFX: ${{ inputs.message-prefix }}
       run: |
@@ -20,6 +21,7 @@ runs:
 
     - shell: bash
       name: msha
+      id: msha
       run: |
         message=$(git log -1 --pretty=format:"%B")
         echo "Last commit message: $message"
