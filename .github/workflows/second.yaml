@@ -1,0 +1,24 @@
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  simple-job:
+    name: Print details
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Call reusable action
+        id: pAction
+        with:
+          message-prefix: pavel rulez!
+        uses: ./.github/mega-evil-pavel-action
+
+      - name: Print result
+        env:
+          SHA: ${{ steps.pAction.outputs.short-sha }}
+        run: |
+          echo $SHA
+          echo ${{ steps.pAction.outputs.commit-message }}
