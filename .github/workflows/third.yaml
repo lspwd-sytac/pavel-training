@@ -63,7 +63,7 @@ jobs:
     needs:
       - build
     env:
-      SERVICE_NAME: lspwd2_evil_pavel
+      SERVICE_NAME: lspwd2evilpavel
     steps:
       - name: Check-out repo
         uses: actions/checkout@v4
