@@ -16,14 +16,14 @@ runs:
       run: |
         sha=$(git log -1 --pretty=format:"%h")
         echo "Short sha for $INP_M_PRFX: $sha"
-        echo "s=$sha" >> GITHUB_OUTPUT
+        echo "s=$sha" >> $GITHUB_OUTPUT
 
     - shell: bash
       name: msha
       run: |
         message=$(git log -1 --pretty=format:"%B")
         echo "Last commit message: $message"
-        echo "m=$message" >> GITHUB_OUTPUT
+        echo "m=$message" >> $GITHUB_OUTPUT
 outputs:
   short-sha:
     description: short sha
