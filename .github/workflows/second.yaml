@@ -17,8 +17,10 @@ jobs:
         uses: ./.github/mega-evil-pavel-action
 
       - name: Print result
+        shell: bash
         env:
           SHA: ${{ steps.pAction.outputs.short-sha }}
+          MSG: ${{ steps.pAction.outputs.commit-message }}
         run: |
           echo $SHA
-          echo ${{ steps.pAction.outputs.commit-message }}
+          echo $MSG
