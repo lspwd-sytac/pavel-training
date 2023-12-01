@@ -3,7 +3,6 @@ name: Build and deploy
 on:
   workflow_dispatch:
 
-
 jobs:
   build:
     name: Build and push docker image
@@ -31,13 +30,13 @@ jobs:
         env:
           ARTIFACT_REGISTRY: ${{ vars.ARTIFACT_REGISTRY }}
           REPOSITORY_NAME: ${{ vars.REPOSITORY_NAME }}
-          IMAGE_TAG: <image-tag>
+          IMAGE_TAG: ${{ steps.commit.outputs.short-sha }}
         run: docker build . -t $ARTIFACT_REGISTRY/$REPOSITORY_NAME/$IMAGE_NAME:$IMAGE_TAG
 
       - name: Auth to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: <plain-secret>
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
       - name: Configure docker
         env:
@@ -48,7 +47,7 @@ jobs:
         env:
           ARTIFACT_REGISTRY: ${{ vars.ARTIFACT_REGISTRY }}
           REPOSITORY_NAME: ${{ vars.REPOSITORY_NAME }}
-          IMAGE_TAG: <image-tag>
+          IMAGE_TAG: ${{ steps.commit.outputs.short-sha }}
         run: docker push $ARTIFACT_REGISTRY/$REPOSITORY_NAME/$IMAGE_NAME:$IMAGE_TAG
 
     outputs:
